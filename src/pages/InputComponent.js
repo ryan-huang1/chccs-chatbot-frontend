@@ -92,7 +92,7 @@ const InputComponent = ({ onTranslate, isLoading }) => {
       padding: "10px 20px",
       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
       fontWeight: "bold",
-      transition: "transform 0.2s ease, background 0.3s ease",
+      transition: "transform 0.2s ease",
       marginTop: "5px",
       marginRight: "5px",
     },
@@ -101,9 +101,20 @@ const InputComponent = ({ onTranslate, isLoading }) => {
       cursor: "pointer",
     },
     translateButton: {
-      background: isLoading ? "gray" : "orange",
+      background: "orange",
       cursor: isLoading ? "not-allowed" : "pointer",
-      opacity: isLoading ? 0.7 : 1,
+      position: "relative",
+      overflow: "hidden",
+    },
+    tint: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(128, 128, 128, 0.5)",
+      pointerEvents: "none",
+      animation: isLoading ? "pulse 1.5s infinite" : "none",
     },
   });
 
@@ -179,7 +190,21 @@ const InputComponent = ({ onTranslate, isLoading }) => {
         {!isNarrowScreen && (
           <span style={{ fontSize: "1.1rem" }}>Translate</span>
         )}
+        {isLoading && <div style={styles.tint} />}
       </button>
+      <style jsx>{`
+        @keyframes pulse {
+          0% {
+            opacity: 0.2;
+          }
+          50% {
+            opacity: 0.6;
+          }
+          100% {
+            opacity: 0.2;
+          }
+        }
+      `}</style>
     </div>
   );
 };
