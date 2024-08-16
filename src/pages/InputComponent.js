@@ -33,17 +33,17 @@ const InputComponent = ({ onTranslate, isLoading }) => {
     }
   };
 
-  const fetchRandomPhrase = () => {
-    const apiUrl = `${process.env.REACT_APP_API_URL}/random`;
+  const fetchRandomQuestion = () => {
+    const apiUrl = `${process.env.REACT_APP_API_URL}/random_question`;
 
     axios
       .get(apiUrl)
       .then((response) => {
-        setInputValue(response.data.phrase);
+        setInputValue(response.data.question);
         setTimeout(adjustTextareaHeight, 0);
       })
       .catch((error) => {
-        console.error("Failed to fetch random phrase:", error);
+        console.error("Failed to fetch random question:", error);
       });
   };
 
@@ -124,7 +124,7 @@ const InputComponent = ({ onTranslate, isLoading }) => {
     <div style={styles.inputContainer}>
       <textarea
         ref={textareaRef}
-        placeholder="What can I help you with?"
+        placeholder="Ask a question about school board policies"
         style={styles.textareaField}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -134,10 +134,10 @@ const InputComponent = ({ onTranslate, isLoading }) => {
       />
       <button
         style={{ ...styles.button, ...styles.randomButton }}
-        onClick={fetchRandomPhrase}
+        onClick={fetchRandomQuestion}
         onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
         onMouseOut={(e) => (e.currentTarget.style.transform = "none")}
-        title="Fetch Random Phrase"
+        title="Fetch Random Question"
       >
         <div
           style={{
@@ -187,9 +187,7 @@ const InputComponent = ({ onTranslate, isLoading }) => {
             <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
           </svg>
         </div>
-        {!isNarrowScreen && (
-          <span style={{ fontSize: "1.1rem" }}>Translate</span>
-        )}
+        {!isNarrowScreen && <span style={{ fontSize: "1.1rem" }}>Submit</span>}
         {isLoading && <div style={styles.tint} />}
       </button>
       <style jsx>{`
