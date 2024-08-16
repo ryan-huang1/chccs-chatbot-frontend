@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const InputComponent = ({ onTranslate }) => {
+const InputComponent = ({ onTranslate, isLoading }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isNarrowScreen, setIsNarrowScreen] = useState(window.innerWidth < 700);
   const [inputValue, setInputValue] = useState("");
@@ -14,7 +14,6 @@ const InputComponent = ({ onTranslate }) => {
     };
 
     window.addEventListener("resize", handleResize);
-    // Initial adjustment on component mount
     adjustTextareaHeight();
 
     return () => {
@@ -41,8 +40,7 @@ const InputComponent = ({ onTranslate }) => {
       .get(apiUrl)
       .then((response) => {
         setInputValue(response.data.phrase);
-        // Adjust textarea height after setting new text
-        setTimeout(adjustTextareaHeight, 0); // Ensures adjustment occurs after DOM updates
+        setTimeout(adjustTextareaHeight, 0);
       })
       .catch((error) => {
         console.error("Failed to fetch random phrase:", error);
@@ -84,21 +82,28 @@ const InputComponent = ({ onTranslate }) => {
       lineHeight: "30px",
       paddingLeft: "10px",
     },
-    chatButton: {
+    button: {
       display: "flex",
       alignItems: "center",
-      background: "orange",
       color: "white",
       border: "none",
       outline: "none",
       borderRadius: "20px",
       padding: "10px 20px",
       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-      cursor: "pointer",
       fontWeight: "bold",
-      transition: "transform 0.2s ease",
+      transition: "transform 0.2s ease, background 0.3s ease",
       marginTop: "5px",
       marginRight: "5px",
+    },
+    randomButton: {
+      background: "orange",
+      cursor: "pointer",
+    },
+    translateButton: {
+      background: isLoading ? "gray" : "orange",
+      cursor: isLoading ? "not-allowed" : "pointer",
+      opacity: isLoading ? 0.7 : 1,
     },
   });
 
@@ -117,7 +122,7 @@ const InputComponent = ({ onTranslate }) => {
         rows="1"
       />
       <button
-        style={{ ...styles.chatButton, marginRight: "10px" }}
+        style={{ ...styles.button, ...styles.randomButton }}
         onClick={fetchRandomPhrase}
         onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
         onMouseOut={(e) => (e.currentTarget.style.transform = "none")}
@@ -138,8 +143,8 @@ const InputComponent = ({ onTranslate }) => {
             fill="currentColor"
             className="bi bi-shuffle"
             viewBox="0 0 16 16"
-            strokeWidth="2" // Line thickness increased here
-            style={{ marginLeft: "1px" }} // Added 3px margin left
+            strokeWidth="2"
+            style={{ marginLeft: "1px" }}
           >
             <path
               fillRule="evenodd"
@@ -150,10 +155,13 @@ const InputComponent = ({ onTranslate }) => {
         </div>
       </button>
       <button
-        style={styles.chatButton}
-        onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
+        style={{ ...styles.button, ...styles.translateButton }}
+        onMouseOver={(e) =>
+          !isLoading && (e.currentTarget.style.transform = "scale(1.08)")
+        }
         onMouseOut={(e) => (e.currentTarget.style.transform = "none")}
-        onClick={() => onTranslate(inputValue)}
+        onClick={() => !isLoading && onTranslate(inputValue)}
+        disabled={isLoading}
       >
         <div style={{ marginRight: "7px", paddingTop: "2px" }}>
           <svg

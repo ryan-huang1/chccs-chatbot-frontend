@@ -12,6 +12,7 @@ function Home() {
   const [opacity, setOpacity] = useState(1);
   const [contentBoxOpacity, setContentBoxOpacity] = useState(0);
   const [translatedText, setTranslatedText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,6 +27,8 @@ function Home() {
     setOpacity(0);
     setShowDescriptionBox(false);
     setShowContentBox(true);
+    setIsLoading(true);
+    setContentBoxOpacity(0);
 
     const apiUrl = `${process.env.REACT_APP_API_URL}/translate`;
     axios
@@ -37,10 +40,13 @@ function Home() {
       .then((response) => {
         setTranslatedText(response.data);
         setContentBoxOpacity(1);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("There was an error with the translation API:", error);
         setTranslatedText("Failed to translate. Please try again.");
+        setContentBoxOpacity(1);
+        setIsLoading(false);
       });
   };
 
@@ -81,7 +87,10 @@ function Home() {
         <TitleCard />
       </div>
       <div style={styles.inputComponent}>
-        <InputComponent onTranslate={handleTranslateText} />
+        <InputComponent
+          onTranslate={handleTranslateText}
+          isLoading={isLoading}
+        />
       </div>
       {showDescriptionBox && (
         <div style={{ ...styles.descriptionBox, opacity }}>
@@ -90,7 +99,7 @@ function Home() {
       )}
       {showContentBox && (
         <div style={{ ...styles.contentBox, opacity: contentBoxOpacity }}>
-          <ContentBox text={translatedText || "Loading..."} />
+          <ContentBox text={translatedText} />
         </div>
       )}
     </div>
