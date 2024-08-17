@@ -46,7 +46,7 @@ function TitleCard() {
         rel="noopener noreferrer"
         style={{ ...textStyle, fontSize: "20px", marginBottom: "20px" }}
       >
-        Back to Ryan's Homepage
+        Return to Ryan's Homepage
       </a>
       <div style={textStyle}>CHCCS Policy Manual - Chatbot</div>
     </div>
