@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 
 function ContentBox({ text }) {
   const styles = {
@@ -29,7 +30,13 @@ function ContentBox({ text }) {
 
   return (
     <div style={styles.box}>
-      <p style={styles.text}>{text}</p>
+      <ReactMarkdown
+        components={{
+          p: ({ node, ...props }) => <p style={styles.text} {...props} />,
+        }}
+      >
+        {text}
+      </ReactMarkdown>
     </div>
   );
 }
