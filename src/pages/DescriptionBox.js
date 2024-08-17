@@ -12,7 +12,7 @@ function DescriptionBox() {
       borderRadius: "20px",
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center",
+      justifyContent: "flex-start",
       alignItems: "center",
       padding: "20px",
     },
