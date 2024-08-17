@@ -28,15 +28,64 @@ function ContentBox({ text }) {
     },
   };
 
+  const markdownComponents = {
+    p: ({ node, ...props }) => <p style={styles.text} {...props} />,
+    // eslint-disable-next-line jsx-a11y/heading-has-content
+    h1: ({ node, ...props }) => (
+      <h1
+        style={{ ...styles.text, fontSize: "24px", fontWeight: "bold" }}
+        {...props}
+      />
+    ),
+    // eslint-disable-next-line jsx-a11y/heading-has-content
+    h2: ({ node, ...props }) => (
+      <h2
+        style={{ ...styles.text, fontSize: "22px", fontWeight: "bold" }}
+        {...props}
+      />
+    ),
+    // eslint-disable-next-line jsx-a11y/heading-has-content
+    h3: ({ node, ...props }) => (
+      <h3
+        style={{ ...styles.text, fontSize: "20px", fontWeight: "bold" }}
+        {...props}
+      />
+    ),
+    ul: ({ node, ...props }) => (
+      <ul
+        style={{ ...styles.text, listStyleType: "disc", paddingLeft: "20px" }}
+        {...props}
+      />
+    ),
+    ol: ({ node, ...props }) => (
+      <ol
+        style={{
+          ...styles.text,
+          listStyleType: "decimal",
+          paddingLeft: "20px",
+        }}
+        {...props}
+      />
+    ),
+    li: ({ node, ...props }) => <li style={styles.text} {...props} />,
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
+    a: ({ node, ...props }) => (
+      <a
+        style={{ ...styles.text, color: "blue", textDecoration: "underline" }}
+        {...props}
+      />
+    ),
+    em: ({ node, ...props }) => (
+      <em style={{ ...styles.text, fontStyle: "italic" }} {...props} />
+    ),
+    strong: ({ node, ...props }) => (
+      <strong style={{ ...styles.text, fontWeight: "bold" }} {...props} />
+    ),
+  };
+
   return (
     <div style={styles.box}>
-      <ReactMarkdown
-        components={{
-          p: ({ node, ...props }) => <p style={styles.text} {...props} />,
-        }}
-      >
-        {text}
-      </ReactMarkdown>
+      <ReactMarkdown components={markdownComponents}>{text}</ReactMarkdown>
     </div>
   );
 }
