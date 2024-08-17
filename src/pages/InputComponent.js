@@ -21,6 +21,10 @@ const InputComponent = ({ onSubmit, isLoading }) => {
     };
   }, []);
 
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [inputValue]);
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     adjustTextareaHeight();
