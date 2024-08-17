@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Set the REACT_APP_API_URL environment variable
-ENV REACT_APP_API_URL=https://osmos-translate-backend-ryanhuang9.replit.app
+ENV REACT_APP_API_URL=https://stingray-app-xuait.ondigitalocean.app
 
 # Install any needed packages specified in package.json
 RUN npm install
