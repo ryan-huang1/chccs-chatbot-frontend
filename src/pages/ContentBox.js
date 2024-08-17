@@ -26,7 +26,7 @@ function ContentBox({ text }) {
       color: "#424242",
       marginTop: "10px",
       marginLeft: "10px",
-      paddingBottom: "10px",
+      paddingBottom: "5px",
     },
   };
 
