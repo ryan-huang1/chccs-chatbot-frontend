@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "../logo.png";
 
 function TitleCard() {
   const [isNarrowScreen, setIsNarrowScreen] = useState(window.innerWidth < 700);
@@ -31,11 +30,6 @@ function TitleCard() {
     color: "black",
     textAlign: "center",
     marginTop: isNarrowScreen ? "5px" : "10px", // Smaller margin top when screen is narrow
-  };
-
-  const logoStyle = {
-    width: "auto", // Adjust width as needed or keep it auto for intrinsic size
-    height: isNarrowScreen ? "25px" : "40px", // Smaller height when screen is narrow
   };
 
   return (
