@@ -8,7 +8,7 @@ function ContentBox({ text }) {
       minHeight: "100px",
       border: "1px solid lightgray",
       background:
-        "linear-gradient(180deg, rgba(250,250,240,1) 0%, rgba(247, 247, 213,1) 100%)",
+        "linear-gradient(180deg, rgba(251,251,234,1) 0%, rgba(247,247,213,1) 50%, rgba(247,247,213,1) 100%)",
       boxSizing: "border-box",
       borderRadius: "20px",
       display: "flex",
@@ -18,13 +18,15 @@ function ContentBox({ text }) {
       padding: "10px 20px 10px 20px",
     },
     text: {
-      width: "100%",
+      width: "95%",
       textAlign: "left",
       fontFamily: "Georgia, serif",
       fontSize: "19px",
       lineHeight: "24px",
       color: "#424242",
       marginTop: "10px",
+      marginLeft: "10px",
+      paddingBottom: "10px",
     },
   };
 
