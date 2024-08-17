@@ -1,27 +1,6 @@
 import React from "react";
 
 function ContentBox({ text }) {
-  // Check if text is an object and render accordingly
-  const renderText = () => {
-    // If text is an object and not empty
-    if (typeof text === "object" && text !== null) {
-      return (
-        <>
-          <p style={styles.text}>
-            <strong>Literal Translation:</strong> {text.literal_translation}
-          </p>
-          <p style={styles.text}>
-            <strong>Non-Literal Translation:</strong>{" "}
-            {text.non_literal_translation}
-          </p>
-        </>
-      );
-    } else {
-      // Fallback or initial text
-      return <p style={styles.text}>{text}</p>;
-    }
-  };
-
   const styles = {
     box: {
       width: "calc(100% + 20px)",
@@ -34,21 +13,25 @@ function ContentBox({ text }) {
       display: "flex",
       flexDirection: "column",
       justifyContent: "flex-start",
-      alignItems: "flex-start", // Align items to the start (left) instead of center
-      padding: "10px 20px 10px 20px", // Added top and bottom padding of 10px
+      alignItems: "flex-start",
+      padding: "10px 20px 10px 20px",
     },
     text: {
       width: "100%",
-      textAlign: "left", // Ensure text is left-aligned
+      textAlign: "left",
       fontFamily: "Georgia, serif",
-      fontSize: "19px", // Adjust font size as needed
+      fontSize: "19px",
       lineHeight: "24px",
       color: "#424242",
-      marginTop: "10px", // Add some space between paragraphs
+      marginTop: "10px",
     },
   };
 
-  return <div style={styles.box}>{renderText()}</div>;
+  return (
+    <div style={styles.box}>
+      <p style={styles.text}>{text}</p>
+    </div>
+  );
 }
 
 export default ContentBox;

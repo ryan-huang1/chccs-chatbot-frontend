@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const InputComponent = ({ onTranslate, isLoading }) => {
+const InputComponent = ({ onSubmit, isLoading }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isNarrowScreen, setIsNarrowScreen] = useState(window.innerWidth < 700);
   const [inputValue, setInputValue] = useState("");
@@ -100,7 +100,7 @@ const InputComponent = ({ onTranslate, isLoading }) => {
       background: "orange",
       cursor: "pointer",
     },
-    translateButton: {
+    submitButton: {
       background: "orange",
       cursor: isLoading ? "not-allowed" : "pointer",
       position: "relative",
@@ -166,12 +166,12 @@ const InputComponent = ({ onTranslate, isLoading }) => {
         </div>
       </button>
       <button
-        style={{ ...styles.button, ...styles.translateButton }}
+        style={{ ...styles.button, ...styles.submitButton }}
         onMouseOver={(e) =>
           !isLoading && (e.currentTarget.style.transform = "scale(1.08)")
         }
         onMouseOut={(e) => (e.currentTarget.style.transform = "none")}
-        onClick={() => !isLoading && onTranslate(inputValue)}
+        onClick={() => !isLoading && onSubmit(inputValue)}
         disabled={isLoading}
       >
         <div style={{ marginRight: "7px", paddingTop: "2px" }}>

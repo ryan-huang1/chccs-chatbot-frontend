@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TitleCard from "./TitleCard";
 import InputComponent from "./InputComponent";
-import DescriptionBox from "./DescriptionBox";
 import ContentBox from "./ContentBox";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
-  const [showDescriptionBox, setShowDescriptionBox] = useState(true);
   const [showContentBox, setShowContentBox] = useState(false);
-  const [opacity, setOpacity] = useState(1);
   const [contentBoxOpacity, setContentBoxOpacity] = useState(0);
-  const [translatedText, setTranslatedText] = useState("");
+  const [modelResponse, setModelResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -23,28 +20,26 @@ function Home() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleTranslateText = (text) => {
-    setOpacity(0);
-    setShowDescriptionBox(false);
+  const handleSubmit = (input) => {
     setShowContentBox(true);
     setIsLoading(true);
     setContentBoxOpacity(0);
 
-    const apiUrl = `${process.env.REACT_APP_API_URL}/translate`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/chat`;
     axios
       .post(
         apiUrl,
-        { text: text },
+        { message: input },
         { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
-        setTranslatedText(response.data);
+        setModelResponse(response.data.response);
         setContentBoxOpacity(1);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("There was an error with the translation API:", error);
-        setTranslatedText("Failed to translate. Please try again.");
+        console.error("There was an error with the chat API:", error);
+        setModelResponse("Failed to get a response. Please try again.");
         setContentBoxOpacity(1);
         setIsLoading(false);
       });
@@ -60,10 +55,6 @@ function Home() {
       paddingTop: "40px",
       backgroundColor: "#fafaf0",
       marginRight: "20px",
-    },
-    descriptionBox: {
-      width: isSmallScreen ? "80%" : "50%",
-      marginBottom: "20px",
     },
     titleCard: {
       width: isSmallScreen ? "80%" : "50%",
@@ -87,19 +78,11 @@ function Home() {
         <TitleCard />
       </div>
       <div style={styles.inputComponent}>
-        <InputComponent
-          onTranslate={handleTranslateText}
-          isLoading={isLoading}
-        />
+        <InputComponent onSubmit={handleSubmit} isLoading={isLoading} />
       </div>
-      {showDescriptionBox && (
-        <div style={{ ...styles.descriptionBox, opacity }}>
-          <DescriptionBox />
-        </div>
-      )}
       {showContentBox && (
         <div style={{ ...styles.contentBox, opacity: contentBoxOpacity }}>
-          <ContentBox text={translatedText} />
+          <ContentBox text={modelResponse} />
         </div>
       )}
     </div>
