@@ -85,6 +85,7 @@ const InputComponent = ({ onSubmit, isLoading }) => {
     button: {
       display: "flex",
       alignItems: "center",
+      justifyContent: "center",
       color: "white",
       border: "none",
       outline: "none",
@@ -106,6 +107,13 @@ const InputComponent = ({ onSubmit, isLoading }) => {
       position: "relative",
       overflow: "hidden",
     },
+    iconContainer: {
+      width: "24px",
+      height: "24px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
     tint: {
       position: "absolute",
       top: 0,
@@ -119,6 +127,42 @@ const InputComponent = ({ onSubmit, isLoading }) => {
   });
 
   const styles = getDynamicStyles();
+
+  const LoadingSpinner = () => (
+    <svg
+      className="spinner"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        className="spinner-circle"
+        cx="12"
+        cy="12"
+        r="10"
+        fill="none"
+        strokeWidth="3"
+      />
+    </svg>
+  );
+
+  const SendIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="22" y1="2" x2="11" y2="13" />
+      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+    </svg>
+  );
 
   return (
     <div style={styles.inputContainer}>
@@ -174,20 +218,12 @@ const InputComponent = ({ onSubmit, isLoading }) => {
         onClick={() => !isLoading && onSubmit(inputValue)}
         disabled={isLoading}
       >
-        <div style={{ marginRight: "7px", paddingTop: "2px" }}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="17"
-            height="17"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            stroke="white"
-            strokeWidth="1"
-          >
-            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
-          </svg>
+        <div style={styles.iconContainer}>
+          {isLoading ? <LoadingSpinner /> : <SendIcon />}
         </div>
-        {!isNarrowScreen && <span style={{ fontSize: "1.1rem" }}>Submit</span>}
+        {!isNarrowScreen && (
+          <span style={{ fontSize: "1.1rem", marginLeft: "7px" }}>Submit</span>
+        )}
         {isLoading && <div style={styles.tint} />}
       </button>
       <style jsx>{`
@@ -201,6 +237,33 @@ const InputComponent = ({ onSubmit, isLoading }) => {
           100% {
             opacity: 0.2;
           }
+        }
+        @keyframes rotate {
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes dash {
+          0% {
+            stroke-dasharray: 1, 150;
+            stroke-dashoffset: 0;
+          }
+          50% {
+            stroke-dasharray: 90, 150;
+            stroke-dashoffset: -35;
+          }
+          100% {
+            stroke-dasharray: 90, 150;
+            stroke-dashoffset: -124;
+          }
+        }
+        .spinner {
+          animation: rotate 2s linear infinite;
+        }
+        .spinner-circle {
+          stroke: white;
+          stroke-linecap: round;
+          animation: dash 1.5s ease-in-out infinite;
         }
       `}</style>
     </div>
