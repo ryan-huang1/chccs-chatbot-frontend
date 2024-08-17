@@ -12,7 +12,7 @@ function DescriptionBox() {
       borderRadius: "20px",
       display: "flex",
       flexDirection: "column",
-      justifyContent: "flex-start",
+      justifyContent: "center",
       alignItems: "center",
       padding: "20px",
     },
@@ -26,7 +26,7 @@ function DescriptionBox() {
       color: "#424242",
     },
     list: {
-      width: "90%",
+      width: "70%",
       textAlign: "left",
       listStyleType: "none",
       fontFamily: "Georgia, serif",
