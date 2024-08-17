@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 function ContentBox({ text }) {
   const styles = {
     box: {
-      width: "calc(100% + 20px)",
+      width: "100%",
       minHeight: "100px",
       border: "1px solid lightgray",
       background:

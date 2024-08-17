@@ -3,7 +3,7 @@ import React from "react";
 function DescriptionBox() {
   const styles = {
     box: {
-      width: "calc(100% + 20px)",
+      width: "100%",
       minHeight: "100px",
       border: "1px solid lightblue",
       background:

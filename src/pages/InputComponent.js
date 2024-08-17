@@ -57,7 +57,8 @@ const InputComponent = ({ onSubmit, isLoading }) => {
       boxShadow: isFocused
         ? "0px -2px 4px rgba(0, 0, 0, 0.02), 0px 4px 8px rgba(0, 0, 0, 0.2)"
         : "0px 4px 6px rgba(0, 0, 0, 0.1)",
-      padding: "10px",
+      paddingTop: "10px",
+      paddingBottom: "10px",
       backgroundColor: "white",
       border: "0.5px solid #d6d6d6",
       transition: "box-shadow 0.3s ease",
@@ -80,7 +81,7 @@ const InputComponent = ({ onSubmit, isLoading }) => {
       backgroundColor: "transparent",
       fontFamily: "Georgia",
       lineHeight: "30px",
-      paddingLeft: "10px",
+      paddingLeft: "20px",
     },
     button: {
       display: "flex",
@@ -95,7 +96,7 @@ const InputComponent = ({ onSubmit, isLoading }) => {
       fontWeight: "bold",
       transition: "transform 0.2s ease",
       marginTop: "5px",
-      marginRight: "5px",
+      marginRight: "10px",
     },
     randomButton: {
       background: "orange",
@@ -106,6 +107,7 @@ const InputComponent = ({ onSubmit, isLoading }) => {
       cursor: isLoading ? "not-allowed" : "pointer",
       position: "relative",
       overflow: "hidden",
+      paddingRight: "20px",
     },
     iconContainer: {
       width: "24px",
