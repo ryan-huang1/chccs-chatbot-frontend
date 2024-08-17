@@ -12,7 +12,7 @@ function DescriptionBox() {
       borderRadius: "20px",
       display: "flex",
       flexDirection: "column",
-      justifyContent: "flex-start",
+      justifyContent: "center",
       alignItems: "center",
       padding: "20px",
     },
@@ -51,14 +51,14 @@ function DescriptionBox() {
 
   return (
     <div style={styles.box}>
-      <p style={styles.text}>Technical Demo - SOTA Latin Translator</p>
+      <p style={styles.text}>Technical Demo - Chatbot for Policy Manual</p>
       <ul style={styles.list}>
         <li style={styles.listItem}>
           <span style={styles.emojiBell}>🔔</span>
           <span>
             {" "}
             - This is a technical demo and should not be used for important
-            translations.
+            information.
           </span>
         </li>
         <li style={styles.listItem}>
@@ -74,7 +74,7 @@ function DescriptionBox() {
           <span>
             {" "}
             - Do not input any sensitive or personal information into the
-            translator.
+            website.
           </span>
         </li>
       </ul>

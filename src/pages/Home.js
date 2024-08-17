@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TitleCard from "./TitleCard";
 import InputComponent from "./InputComponent";
+import DescriptionBox from "./DescriptionBox";
 import ContentBox from "./ContentBox";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
+  const [showDescriptionBox, setShowDescriptionBox] = useState(true);
   const [showContentBox, setShowContentBox] = useState(false);
+  const [descriptionBoxOpacity, setDescriptionBoxOpacity] = useState(1);
   const [contentBoxOpacity, setContentBoxOpacity] = useState(0);
   const [modelResponse, setModelResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +24,8 @@ function Home() {
   }, []);
 
   const handleSubmit = (input) => {
+    setDescriptionBoxOpacity(0);
+    setShowDescriptionBox(false);
     setShowContentBox(true);
     setIsLoading(true);
     setContentBoxOpacity(0);
@@ -64,6 +69,12 @@ function Home() {
       width: isSmallScreen ? "80%" : "50%",
       marginBottom: "20px",
     },
+    descriptionBox: {
+      width: isSmallScreen ? "80%" : "50%",
+      marginBottom: "20px",
+      opacity: descriptionBoxOpacity,
+      transition: "opacity 0.3s ease-out",
+    },
     contentBox: {
       width: isSmallScreen ? "80%" : "50%",
       marginBottom: "20px",
@@ -80,8 +91,13 @@ function Home() {
       <div style={styles.inputComponent}>
         <InputComponent onSubmit={handleSubmit} isLoading={isLoading} />
       </div>
+      {showDescriptionBox && (
+        <div style={styles.descriptionBox}>
+          <DescriptionBox />
+        </div>
+      )}
       {showContentBox && (
-        <div style={{ ...styles.contentBox, opacity: contentBoxOpacity }}>
+        <div style={styles.contentBox}>
           <ContentBox text={modelResponse} />
         </div>
       )}
