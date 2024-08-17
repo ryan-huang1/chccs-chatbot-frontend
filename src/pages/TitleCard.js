@@ -30,7 +30,7 @@ function TitleCard() {
     fontWeight: "500",
     color: "black",
     textAlign: "center",
-    marginTop: isNarrowScreen ? "30px" : "60px", // Smaller margin top when screen is narrow
+    marginTop: isNarrowScreen ? "5px" : "10px", // Smaller margin top when screen is narrow
   };
 
   const logoStyle = {
@@ -41,13 +41,14 @@ function TitleCard() {
   return (
     <div style={containerStyle}>
       <a
-        href="https://osmoslearn.com"
+        href="https://ryanhuang.xyz"
         target="_blank"
         rel="noopener noreferrer"
+        style={{ ...textStyle, fontSize: "20px", marginBottom: "20px" }}
       >
-        <img src={logo} alt="Logo" style={logoStyle} />
+        Back to Ryan's Homepage
       </a>
-      <div style={textStyle}>Transformer Based - Latin Translator</div>
+      <div style={textStyle}>CHCCS Policy Manual - Chatbot</div>
     </div>
   );
 }
