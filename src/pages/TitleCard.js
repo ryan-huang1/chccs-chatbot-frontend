@@ -42,7 +42,7 @@ function TitleCard() {
       >
         Return to Ryan's Homepage
       </a>
-      <div style={textStyle}>CHCCS Policy Manual - Chatbot</div>
+      <div style={textStyle}>CHCCS Policy Manual</div>
     </div>
   );
 }
